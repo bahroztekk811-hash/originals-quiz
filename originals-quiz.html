@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ku" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تاقیکردنەوەی ڕەسەنەکان | BAHROZ</title>
+<style>
+:root{--bg:#100d18;--panel:#1d1728;--gold:#d6ad63;--text:#f8f3ea;--muted:#c2b8c9;--line:#40334f}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#33213d 0,#100d18 55%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;min-height:100vh;padding:22px}
+main{max-width:760px;margin:0 auto}.hero,.quiz,.result{background:rgba(29,23,40,.96);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 18px 50px #0005}
+.hero{text-align:center;margin:10px 0 18px}.sigil{font-size:42px}.eyebrow{color:var(--gold);letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(26px,6vw,40px);margin:8px 0}.hero p{color:var(--muted);line-height:1.9;margin:8px auto;max-width:560px}
+.meta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:15px}.pill{border:1px solid var(--line);border-radius:30px;padding:7px 13px;color:var(--gold);font-size:13px}
+.progressrow{display:flex;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:9px}.bar{height:7px;background:#342a40;border-radius:9px;overflow:hidden;margin-bottom:22px}.bar span{display:block;height:100%;background:var(--gold);width:0;transition:width .2s}
+.qtitle{font-size:21px;line-height:1.8;margin:0 0 18px}.options{display:grid;gap:11px}.option{display:flex;align-items:center;gap:12px;width:100%;text-align:right;background:#251d32;border:1px solid var(--line);border-radius:13px;color:var(--text);padding:14px 15px;font-size:16px;cursor:pointer}.option:active{transform:scale(.99)}.option.selected{border-color:var(--gold);background:#3a2d3b}.letter{display:grid;place-items:center;min-width:28px;height:28px;border-radius:50%;background:#40334f;color:var(--gold);font-size:13px}
+.actions{display:flex;gap:10px;margin-top:22px}.btn{border:0;border-radius:12px;padding:13px 18px;font-size:16px;font-weight:700;cursor:pointer}.primary{background:var(--gold);color:#211729;flex:1}.secondary{background:#30263c;color:var(--text)}.btn:disabled{opacity:.4;cursor:not-allowed}
+.result{text-align:center}.score{font-size:56px;color:var(--gold);font-weight:800;margin:12px}.review{text-align:right;margin-top:22px}.review article{border-top:1px solid var(--line);padding:14px 0;line-height:1.8}.good{color:#8cdaa7}.bad{color:#f19a9a}.hidden{display:none}.credit{color:var(--muted);text-align:center;margin:20px 0 4px;font-size:13px}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+<div class="sigil">🧛🏻‍♂️ 🩸</div>
+<div class="eyebrow">THE MIKAELSON FAMILY</div>
+<h1>تاقیکردنەوەی ڕەسەنەکان</h1>
+<p>ئایا تۆ ڕەسەنەکان باش دەناسی؟ شارەزایی خۆت لەسەر کەسایەتی و ڕووداوەکانی وەرزەکانی یەک تا سێ تاقی بکەرەوە!</p>
+<div class="meta"><span class="pill">وەرزی ١ تا ٣</span><span class="pill">١٥ پرسیار</span><span class="pill">بەخۆڕایی</span></div>
+</section>
+<section class="quiz" id="quiz">
+<div class="progressrow"><span id="counter">پرسیاری ١ لە ١٥</span><span id="answered">٠ وەڵام دراوە</span></div>
+<div class="bar"><span id="progress"></span></div>
+<h2 class="qtitle" id="question"></h2>
+<div class="options" id="options"></div>
+<div class="actions"><button class="btn secondary" id="back" disabled>پێشوو</button><button class="btn primary" id="next" disabled>دواتر</button></div>
+</section>
+<section class="result hidden" id="result">
+<div class="sigil">🏆</div><h2>ئەنجامی تاقیکردنەوە</h2><div class="score" id="score"></div><p id="message"></p>
+<div class="review" id="review"></div>
+<button class="btn primary" onclick="restart()">دووبارە تاقی بکەرەوە</button>
+</section>
+<div class="credit">بە خۆشەویستی دروستکراوە لەلایەن <strong>BAHROZ</strong> ❤️</div>
+</main>
+<script>
+const questions=[
+{q:"کێ لە سەرەتای دراماکەدا دەسەڵاتی نیو ئۆرلینزی لە ژێر کۆنترۆڵی خۆیدا بوو؟",a:["کلاوس مایکلسن","مارسێل جێرارد","ئەلیجە مایکلسن","لوسیەن کاسڵ"],c:1},
+{q:"ناوی کچەکەی کلاوس و هەیلی چییە؟",a:["داڤینا","فرایا","هۆپ","ڕێبێکا"],c:2},
+{q:"داڤینا لە وەرزی یەکەمدا لە ژێر پاراستنی کێدا بوو؟",a:["مارسێل","ئەلیجە","کلاوس","کامیل"],c:0},
+{q:"فرایا مایکلسن چییەتی بۆ کلاوس و ئەلیجە؟",a:["خوشکی بچووکە","دایکیانە","خوشکی گەورەیانە","خاڵۆزایانە"],c:2},
+{q:"ئەستر لە وەرزی دووەمدا بۆچی دەگەڕێتەوە؟",a:["بۆ کوشتنی مارسێل","بۆ گۆڕینی جەستە و چارەنووسی منداڵەکانی","بۆ دۆزینەوەی کامیل","بۆ بردنی هۆپ"],c:1},
+{q:"کامەیان برا یان خوشکی کلاوسن؟",a:["فرایا","ڕێبێکا","ئەلیجە","هەموویان"],c:3},
+{q:"کێ لە وەرزی سێیەمدا بەهۆی سیرەمەوە بووە خوێنمژەیەکی ڕەسەنی پەرەسەندوو؟",a:["ترایستن","مارسێل","کۆڵ","لوسیەن"],c:3},
+{q:"هۆپ کچی کێیە؟",a:["کلاوس و هەیلی","مارسێل و داڤینا","ئەلیجە و کامیل","کۆڵ و ڕێبێکا"],c:0},
+{q:"کام کەسایەتی بە ناوی 'The Original Hybrid' ناسراوە؟",a:["ئەلیجە","کلاوس","مارسێل","لوسیەن"],c:1},
+{q:"کامیل ئۆکۆنێڵ لە سەرەتادا چی بوو؟",a:["خوێنمژ","جادووگەر","مرۆڤ","گۆڕاو"],c:2},
+{q:"ڕاستە یان هەڵە: هۆپ کچی هەیلی و مارسێلە.",a:["ڕاستە","هەڵەیە"],c:1},
+{q:"ڕاستە یان هەڵە: فرایا خوشکی گەورەی کلاوسە.",a:["ڕاستە","هەڵەیە"],c:0},
+{q:"لوسیەن لە وەرزی سێیەمدا بە چی هەڕەشەیەکی گەورە بوو؟",a:["جادووگەرێکی بەهێز","خوێنمژەیەکی ڕەسەنی پەرەسەندوو","گۆڕاوێکی نوێ","مرۆڤێکی ئاسایی"],c:1},
+{q:"کێ لە کۆتایی وەرزی سێیەمدا دەبێتە دوژمنی مایکلسنەکان؟",a:["ترایستن","مارسێل","فین","میکائیل"],c:1},
+{q:"ناوی باوکی کلاوس چییە؟",a:["ئەنسێل","میکائیل","کۆڵ","مارسێل"],c:1}
+];
+let index=0,answers=Array(questions.length).fill(null);
+const $=id=>document.getElementById(id);
+function render(){
+const q=questions[index];$("counter").textContent=`پرسیاری ${index+1} لە ${questions.length}`;
+$("answered").textContent=`${answers.filter(x=>x!==null).length} وەڵام دراوە`;
+$("progress").style.width=`${(index/questions.length)*100}%`;$("question").textContent=q.q;
+$("options").innerHTML="";
+q.a.forEach((a,i)=>{const b=document.createElement("button");b.className="option"+(answers[index]===i?" selected":"");b.innerHTML=`<span class="letter">${["A","B","C","D"][i]}</span><span>${a}</span>`;b.onclick=()=>{answers[index]=i;render()};$("options").appendChild(b)});
+$("back").disabled=index===0;$("next").disabled=answers[index]===null;$("next").textContent=index===questions.length-1?"بینینی ئەنجام":"دواتر";
+}
+$("back").onclick=()=>{if(index>0){index--;render()}};
+$("next").onclick=()=>{if(index<questions.length-1){index++;render()}else finish()};
+function finish(){
+let score=0;questions.forEach((q,i)=>{if(answers[i]===q.c)score++});
+$("quiz").classList.add("hidden");$("result").classList.remove("hidden");$("score").textContent=`${score} / ${questions.length}`;
+$("message").textContent=score===questions.length?"ناوازە! تۆ شارەزایەکی ڕاستەقینەی مایکلسنیت!":score>=10?"زۆر باشە! زانیاریت لەسەر ڕەسەنەکان زۆرە.":"هەوڵێکی تر بدە؛ ڕەسەنەکان هێشتا چەند نهێنییان هەیە!";
+$("review").innerHTML="<h3>پێداچوونەوەی وەڵامەکان</h3>"+questions.map((q,i)=>`<article><strong>${i+1}. ${q.q}</strong><br><span class="${answers[i]===q.c?'good':'bad'}">${answers[i]===q.c?'✓ وەڵامی ڕاست':'✗ وەڵامی هەڵە'}</span><br>وەڵامی ڕاست: ${q.a[q.c]}</article>`).join("");
+}
+function restart(){index=0;answers=Array(questions.length).fill(null);$("result").classList.add("hidden");$("quiz").classList.remove("hidden");render()}
+render();
+</script>
+</body>
+</html>
