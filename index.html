@@ -1,135 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="ku" dir="rtl">
+
 <head>
-<meta charset="utf-8">
+
+<meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>تاقیکردنەوەی ڕەسەنەکان | BAHROZ</title>
+
+<title>KURDISH KNOWLEDGE</title>
+
 <style>
-:root{--bg:#100d18;--panel:#1d1728;--gold:#d6ad63;--text:#f8f3ea;--muted:#c2b8c9;--line:#40334f}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#33213d 0,#100d18 55%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;min-height:100vh;padding:18px}
-main{max-width:780px;margin:0 auto}.hero,.panel{background:rgba(29,23,40,.97);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 18px 50px #0005;margin:12px 0}
-.hero{text-align:center}.sigil{font-size:42px}.eyebrow{color:var(--gold);letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(26px,6vw,40px);margin:8px 0}.hero p{color:var(--muted);line-height:1.9;margin:8px auto;max-width:560px}
-.meta{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:15px}.pill{border:1px solid var(--line);border-radius:30px;padding:7px 13px;color:var(--gold);font-size:13px}
-h2{margin-top:0}.field{width:100%;padding:14px;border-radius:12px;border:1px solid var(--line);background:#251d32;color:var(--text);font-size:17px;margin:8px 0 14px}
-.btn{border:0;border-radius:12px;padding:13px 18px;font-size:16px;font-weight:700;cursor:pointer}.primary{background:var(--gold);color:#211729;flex:1}.secondary{background:#30263c;color:var(--text)}.btn:disabled{opacity:.4;cursor:not-allowed}
-.progressrow{display:flex;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:9px}.bar{height:7px;background:#342a40;border-radius:9px;overflow:hidden;margin-bottom:18px}.bar span{display:block;height:100%;background:var(--gold);width:0;transition:width .2s}
-.qtitle{font-size:21px;line-height:1.8;margin:0 0 14px}.qimage{width:100%;height:175px;border-radius:16px;background:linear-gradient(135deg,#34243f,#171321);display:grid;place-items:center;margin:0 0 17px;border:1px solid var(--line);overflow:hidden}.qimage svg{width:100%;height:100%;max-height:175px}
-.options{display:grid;gap:11px}.option{display:flex;align-items:center;gap:12px;width:100%;text-align:right;background:#251d32;border:1px solid var(--line);border-radius:13px;color:var(--text);padding:14px 15px;font-size:16px;cursor:pointer}.option.selected{border-color:var(--gold);background:#3a2d3b}.letter{display:grid;place-items:center;min-width:28px;height:28px;border-radius:50%;background:#40334f;color:var(--gold);font-size:13px}
-.actions{display:flex;gap:10px;margin-top:22px}.hidden{display:none!important}.result{text-align:center}.score{font-size:54px;color:var(--gold);font-weight:800;margin:12px}.review{text-align:right;margin-top:22px}.review article{border-top:1px solid var(--line);padding:14px 0;line-height:1.8}.good{color:#8cdaa7}.bad{color:#f19a9a}
-.board{text-align:right;line-height:1.8}.board-row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:9px 2px}.credit{color:var(--muted);text-align:center;margin:20px 0 4px;font-size:13px}.credit a{color:var(--gold);text-decoration:none}
-</style>
-</head>
-<body>
-<main>
-<section class="hero">
-<div class="sigil">🧛🏻‍♂️ 🩸</div><div class="eyebrow">THE MIKAELSON FAMILY</div>
-<h1>تاقیکردنەوەی ڕەسەنەکان</h1>
-<p>ئایا تۆ ڕەسەنەکان باش دەناسی؟ شارەزایی خۆت لەسەر کەسایەتی و ڕووداوەکانی وەرزەکانی یەک تا سێ تاقی بکەرەوە!</p>
-<div class="meta"><span class="pill">٣٠ پرسیار</span><span class="pill">١ خاڵ بۆ هەر وەڵامێکی ڕاست</span><span class="pill">وەرزی ١ تا ٣</span></div>
-</section>
 
-<section class="panel" id="start">
-<h2>بەخێربێیت بۆ تاقیکردنەوەکە</h2>
-<label for="playerName">تکایە ناوت بنووسە:</label>
-<input class="field" id="playerName" maxlength="30" placeholder="ناوی بەشداربوو">
-<button class="btn primary" id="startBtn">دەستپێکردنی تاقیکردنەوە</button>
-</section>
+*{box-sizing:border-box}
 
-<section class="panel hidden" id="quiz">
-<div class="progressrow"><span id="counter">پرسیاری ١ لە ٣٠</span><span id="answered">٠ وەڵام دراوە</span></div>
-<div class="bar"><span id="progress"></span></div>
-<div class="qimage" id="qimage" aria-label="وێنەی بابەتی پرسیار"></div>
-<h2 class="qtitle" id="question"></h2><div class="options" id="options"></div>
-<div class="actions"><button class="btn secondary" id="back" disabled>پێشوو</button><button class="btn primary" id="next" disabled>دواتر</button></div>
-</section>
+body{
 
-<section class="panel result hidden" id="result">
-<div class="sigil">🏆</div><h2>ئەنجامی تاقیکردنەوە</h2><p id="playerResult"></p>
-<div class="score" id="score"></div><p id="message"></p>
-<div class="review" id="review"></div>
-<button class="btn primary" onclick="restart()">دووبارە تاقی بکەرەوە</button>
-</section>
+ margin:0;background:#080d1b;color:#fff;
 
-<section class="panel board" id="leaderboard">
-<h2>🏅 لیستی باشترین ئەنجامەکان</h2><div id="scoresList">هێشتا هیچ ئەنجامێک تۆمار نەکراوە.</div>
-<p style="color:var(--muted);font-size:12px">تێبینی: ئەم لیستە تەنها لەسەر هەمان ئامێر و وێبگەڕ هەڵدەگیرێت، نەک لە هەموو ئامێرەکان.</p>
-</section>
-<div class="credit">دروستکراوە لەلایەن <strong>BAHROZ</strong> ❤️<br><a href="https://www.tiktok.com/@b10.x10" target="_blank" rel="noopener">TikTok: @b10.x10</a></div>
-</main>
-<script>
-const questions=[
-{q:"کێ لە سەرەتای دراماکەدا دەسەڵاتی نیو ئۆرلینزی لە ژێر کۆنترۆڵی خۆیدا بوو؟",a:["کلاوس مایکلسن","مارسێل جێرارد","ئەلیجە مایکلسن","لوسیەن کاسڵ"],c:1,art:"⚜️"},
-{q:"ناوی کچەکەی کلاوس و هەیلی چییە؟",a:["داڤینا","فرایا","هۆپ","ڕێبێکا"],c:2,art:"👶"},
-{q:"داڤینا لە وەرزی یەکەمدا لە ژێر پاراستنی کێدا بوو؟",a:["مارسێل","ئەلیجە","کلاوس","کامیل"],c:0,art:"🔮"},
-{q:"فرایا مایکلسن چییەتی بۆ کلاوس و ئەلیجە؟",a:["خوشکی بچووکە","دایکیانە","خوشکی گەورەیانە","خاڵۆزایانە"],c:2,art:"✨"},
-{q:"ئەستر لە وەرزی دووەمدا بۆچی دەگەڕێتەوە؟",a:["بۆ کوشتنی مارسێل","بۆ گۆڕینی جەستە و چارەنووسی منداڵەکانی","بۆ دۆزینەوەی کامیل","بۆ بردنی هۆپ"],c:1,art:"🪄"},
-{q:"کامەیان برا یان خوشکی کلاوسن؟",a:["فرایا","ڕێبێکا","ئەلیجە","هەموویان"],c:3,art:"👨‍👩‍👧‍👦"},
-{q:"کێ لە وەرزی سێیەمدا بەهۆی سیرەمەوە بووە خوێنمژەیەکی ڕەسەنی پەرەسەندوو؟",a:["ترایستن","مارسێل","کۆڵ","لوسیەن"],c:3,art:"🧛"},
-{q:"هۆپ کچی کێیە؟",a:["کلاوس و هەیلی","مارسێل و داڤینا","ئەلیجە و کامیل","کۆڵ و ڕێبێکا"],c:0,art:"🌙"},
-{q:"کام کەسایەتی بە ناوی The Original Hybrid ناسراوە؟",a:["ئەلیجە","کلاوس","مارسێل","لوسیەن"],c:1,art:"🐺"},
-{q:"کامیل ئۆکۆنێڵ لە سەرەتادا چی بوو؟",a:["خوێنمژ","جادووگەر","مرۆڤ","گۆڕاو"],c:2,art:"📖"},
-{q:"ڕاستە یان هەڵە: هۆپ کچی هەیلی و مارسێلە.",a:["ڕاستە","هەڵەیە"],c:1,art:"❓"},
-{q:"ڕاستە یان هەڵە: فرایا خوشکی گەورەی کلاوسە.",a:["ڕاستە","هەڵەیە"],c:0,art:"👑"},
-{q:"لوسیەن لە وەرزی سێیەمدا بە چی هەڕەشەیەکی گەورە بوو؟",a:["جادووگەرێکی بەهێز","خوێنمژەیەکی ڕەسەنی پەرەسەندوو","گۆڕاوێکی نوێ","مرۆڤێکی ئاسایی"],c:1,art:"🩸"},
-{q:"کێ لە کۆتایی وەرزی سێیەمدا دەبێتە دوژمنی مایکلسنەکان؟",a:["ترایستن","مارسێل","فین","میکائیل"],c:1,art:"⚔️"},
-{q:"ناوی باوکی کلاوس چییە؟",a:["ئەنسێل","میکائیل","کۆڵ","مارسێل"],c:1,art:"🛡️"},
-{q:"ڕێبێکا لە خێزانی مایکلسن چییە؟",a:["خوشکی کلاوس","دایکی کلاوس","کچی کلاوس","هاوسەری ئەلیجە"],c:0,art:"💎"},
-{q:"کۆڵ مایکلسن بە کام توانایە ناسراوە؟",a:["جادوو","گۆڕینی شێوە","بێدەنگی","بینینی داهاتوو"],c:0,art:"🔮"},
-{q:"ناوی هاوسەری کلاوس کە دواتر دەبێتە دایکی هۆپ چییە؟",a:["کامیل","هەیلی","داڤینا","ڕێبێکا"],c:1,art:"🌹"},
-{q:"کام شار شوێنی سەرەکی ڕووداوەکانی The Originals ـە؟",a:["نیویۆرک","لۆس ئەنجەلەس","نیو ئۆرلینز","شیکاگۆ"],c:2,art:"🏙️"},
-{q:"کێ لە خێزانی مایکلسن بە ناوی The Original Vampire ناسراون؟",a:["تەنها کلاوس","خێزانی مایکلسن","تەنها مارسێل","جادووگەرەکان"],c:1,art:"🧛‍♂️"},
-{q:"مارسێل پەیوەندییەکی نزیکی لەگەڵ کام کەسی خێزانی مایکلسن هەبوو؟",a:["کلاوس","فین","فرایا","میکائیل"],c:0,art:"🤝"},
-{q:"داڤینا لە کام گرووپەدا بوو؟",a:["خوێنمژەکان","جادووگەرەکان","گۆڕاوەکان","مرۆڤەکان"],c:1,art:"🪄"},
-{q:"کلاوس لە بنەڕەتدا تێکەڵەی کام دوو جۆرە؟",a:["مرۆڤ و جادو","خوێنمژ و گۆڕاو","جادووگەر و مرۆڤ","خوێنمژ و مرۆڤ"],c:1,art:"🐺"},
-{q:"کام کەس لە خێزانی مایکلسن زۆرجار دەیویست خێزانەکەی یەکبخاتەوە؟",a:["ئەلیجە","لوسیەن","ترایستن","مارسێل"],c:0,art:"❤️"},
-{q:"هەیلی لە بنەڕەتدا چی بوو؟",a:["خوێنمژ","جادووگەر","گۆڕاو","مرۆڤ"],c:2,art:"🐺"},
-{q:"میکائیل بە چی ناسراوە؟",a:["باوکی کلاوس و ڕاوچی خوێنمژەکان","براکەی مارسێل","کوڕی ئەلیجە","جادووگەری نیو ئۆرلینز"],c:0,art:"⚔️"},
-{q:"کامیل چۆن پەیوەندی بە کلاوسەوە پەیدا کرد؟",a:["وەک هاوڕێ و دواتر خۆشەویست","وەک خوشک","وەک دایک","وەک دوژمن لە سەرەتاوە"],c:0,art:"📚"},
-{q:"فین مایکلسن کوڕی کێیە؟",a:["ئەستر و میکائیل","هەیلی و کلاوس","داڤینا و مارسێل","کامیل و ئەلیجە"],c:0,art:"🕯️"},
-{q:"سیرەمەکەی لوسیەن چی کرد؟",a:["کردی بە مرۆڤ","کردی بە خوێنمژێکی بەهێزتر","تواناکانی لێسەندەوە","کردی بە جادوگەر"],c:1,art:"🧪"},
-{q:"ناوی دراماکە چییە؟",a:["The Vampire Diaries","Legacies","The Originals","Teen Wolf"],c:2,art:"🎬"}
-];
-let index=0,answers=Array(questions.length).fill(null),player="";
-const $=id=>document.getElementById(id);
-function render(){
- const q=questions[index];
- $("counter").textContent=`پرسیاری ${index+1} لە ${questions.length}`;
- $("answered").textContent=`${answers.filter(x=>x!==null).length} وەڵام دراوە`;
- $("progress").style.width=`${((index+1)/questions.length)*100}%`;
- $("question").textContent=q.q;
- $("qimage").innerHTML=`<div style="font-size:88px;filter:drop-shadow(0 8px 12px #0008)">${q.art}</div>`;
- $("options").innerHTML="";
- q.a.forEach((a,i)=>{const b=document.createElement("button");b.className="option"+(answers[index]===i?" selected":"");b.innerHTML=`<span class="letter">${["A","B","C","D"][i]}</span><span>${a}</span>`;b.onclick=()=>{answers[index]=i;render()};$("options").appendChild(b)});
- $("back").disabled=index===0;$("next").disabled=answers[index]===null;
- $("next").textContent=index===questions.length-1?"بینینی ئەنجام":"دواتر";
+ font-family:Arial,sans-serif;min-height:100vh
+
 }
-$("startBtn").onclick=()=>{
- const name=$("playerName").value.trim();
- if(!name){alert("تکایە ناوت بنووسە.");return}
- player=name;$("start").classList.add("hidden");$("quiz").classList.remove("hidden");render();
-};
-$("back").onclick=()=>{if(index>0){index--;render()}};
-$("next").onclick=()=>{if(index<questions.length-1){index++;render()}else finish()};
-function loadScores(){try{return JSON.parse(localStorage.getItem("originalsQuizScores")||"[]")}catch(e){return []}}
-function showScores(){
- const scores=loadScores().sort((a,b)=>b.score-a.score||a.date-b.date).slice(0,10);
- $("scoresList").innerHTML=scores.length?scores.map((s,i)=>`<div class="board-row"><span>${i+1}. ${escapeHTML(s.name)}</span><strong>${s.score} / 30</strong></div>`).join(""):"هێشتا هیچ ئەنجامێک تۆمار نەکراوە.";
+
+header{
+
+ text-align:center;padding:25px 12px;
+
+ background:linear-gradient(135deg,#172447,#10172b);
+
+ border-bottom:1px solid #34436a
+
 }
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]))}
-function finish(){
- let score=0;questions.forEach((q,i)=>{if(answers[i]===q.c)score++});
- const scores=loadScores();scores.push({name:player,score,date:Date.now()});
- scores.sort((a,b)=>b.score-a.score||a.date-b.date);
- try{localStorage.setItem("originalsQuizScores",JSON.stringify(scores.slice(0,100)))}catch(e){}
- $("quiz").classList.add("hidden");$("result").classList.remove("hidden");
- $("playerResult").textContent=`بەشداربوو: ${player}`;
- $("score").textContent=`${score} / ${questions.length}`;
- $("message").textContent=score===questions.length?"ناوازە! تۆ شارەزایەکی ڕاستەقینەی مایکلسنیت!":score>=20?"زۆر باشە! زانیاریت لەسەر ڕەسەنەکان زۆرە.":score>=10?"باشە! بەردەوام بە و زیاتر فێربە.":"هەوڵێکی تر بدە؛ ڕەسەنەکان هێشتا چەند نهێنییان هەیە!";
- $("review").innerHTML="<h3>پێداچوونەوەی وەڵامەکان</h3>"+questions.map((q,i)=>`<article><strong>${i+1}. ${q.q}</strong><br><span class="${answers[i]===q.c?'good':'bad'}">${answers[i]===q.c?'✓ وەڵامی ڕاست':'✗ وەڵامی هەڵە'}</span><br>وەڵامی تۆ: ${answers[i]===null?'وەڵام نەدراوە':q.a[answers[i]]}<br>وەڵامی ڕاست: ${q.a[q.c]}</article>`).join("");
- showScores();
+
+header h1{color:#f5c451;margin:5px;font-size:28px}
+
+header p{color:#b8c4df}
+
+.container{max-width:850px;margin:25px auto;padding:15px}
+
+.card{
+
+ background:#131e35;border:1px solid #2c3c60;
+
+ border-radius:18px;padding:22px;margin-bottom:18px
+
 }
-function restart(){index=0;answers=Array(questions.length).fill(null);$("result").classList.add("hidden");$("start").classList.remove("hidden");$("quiz").classList.add("hidden");$("playerName").value=player;showScores()}
-showScores();
-</script>
-</body>
-</html>
+
+h2{text-align:center;color:#f5c451}
+
+.categories{
+
+ display:grid;grid-template-columns:repeat(
